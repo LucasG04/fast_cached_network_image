@@ -286,7 +286,7 @@ class _FastCachedImageState extends State<FastCachedImage> with TickerProviderSt
       }
       Response response = await dio.get(url, options: Options(responseType: ResponseType.bytes),
           onReceiveProgress: (int received, int total) {
-        if (received < 0 || total < 0) return;
+        if (received < 0 || total < 0 || !mounted) return;
         if (widget.loadingBuilder != null) {
           _progressData.downloadedBytes = received;
           _progressData.totalBytes = total;
